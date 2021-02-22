@@ -3,7 +3,20 @@ const user = require("../models/User")
 const repairs = require("../models/Repair")
 const authorization = require("../middleware/authorization");
 
-router.get("/api/user/getprofile", authorization, async (req, res) => {
-	const user_profile = await user.findOne()
-    
+rrouter.get("/getprofile", authorization,(req, res) => {
+	try {
+		const query = user.findById('602d9002022d673150ce8a28')
+
+		query.select('first_name last_name')
+
+		query.exec(function (err, docs) {
+			res.status(200).json({
+				"first_name": docs.last_name,
+				"last_name": docs.last_name
+			})
+		})
+	}
+	catch (err) {
+		console.log(err)
+	}
 });
