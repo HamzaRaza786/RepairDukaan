@@ -31,7 +31,7 @@ router.post("/signup/customer", async (req, res) => {
         res.status(500).send("Server Error " + err);
     }
 });
-router.post("/login/customer", validInfo, async (req, res) => {
+router.post("/login/customer",validInfo, async (req, res) => {
     try {
         const { email, password } = req.body;
         const user_1 = await user.findOne({ email }).lean()

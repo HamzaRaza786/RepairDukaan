@@ -18,6 +18,7 @@ app.use('/', express.static(path.join(__dirname, 'static')))
 //register and login routes
 const port = process.env.PORT;
 app.use("", require("./routes/start"));
+app.use("",require("./routes/getProfile"));
 app.listen(port,() =>{
     console.log('server is working on port ',port);
 }); 
