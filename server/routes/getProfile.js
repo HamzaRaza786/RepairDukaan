@@ -8,12 +8,13 @@ router.get("/getprofile",(req, res) => {
 	try {
 		const query = user.findById('602d9002022d673150ce8a28')
 
-		query.select('first_name last_name')
+		query.select('first_name last_name join_date')
 
 		query.exec(function (err, docs) {
 			res.status(200).json({
 				"first_name": docs.last_name,
-				"last_name": docs.last_name
+				"last_name": docs.last_name,
+				"date_joined": docs.join_date,
 			})
 		})
 	}
