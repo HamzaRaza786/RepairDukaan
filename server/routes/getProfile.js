@@ -4,9 +4,12 @@ const repairs = require("../models/Repair")
 const authorization = require("../middleware/authorization");
 const { Router } = require("express");
 
-router.get("/getprofile",(req, res) => {
+router.get("/getprofile", async (req, res) => {
 	try {
-		const query = user.findById('602d9002022d673150ce8a28')
+
+		const testID = req.body
+
+		const query = await user.findById(testID)
 
 		query.select('first_name last_name join_date')
 
