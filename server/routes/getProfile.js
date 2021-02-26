@@ -4,7 +4,7 @@ const repairs = require("../models/Repair")
 const authorization = require("../middleware/authorization");
 const { Router } = require("express");
 
-router.get("/api/user/getprofile", (req, res) => {
+router.get("/api/user/getprofile",authorization, (req, res) => {
 	const { testID } = req.body
 
 	user.findById({ _id: testID }, function(err, docs) {
