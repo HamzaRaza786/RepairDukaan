@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 const user = require("../models/User")
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
-router.post("/signup/customer", async (req, res) => {
+router.post("/signup/customer", validInfo,async (req, res) => {
     try {
         const { first_name, last_name, email, password, phone_number } = req.body;
         const user_1 = await user.findOne({ email })
