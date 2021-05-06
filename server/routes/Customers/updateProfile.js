@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const user = require("../models/User")
+const user = require("../../models/User")
 //onst repairs = require("../models/Repair")
 //const authorization = require("../middleware/authorization");
 //const { Router } = require("express");

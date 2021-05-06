@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const bcrypt = require('bcrypt-nodejs');
-const user = require("../models/User")
-const validInfo = require("../middleware/validInfo");
-const authorization = require("../middleware/authorization");
-const jwtGenerator = require("../utils/jwtGenerator");
+const user = require("../../models/User")
+const validInfo = require("../../middleware/validInfo");
+const authorization = require("../../middleware/authorization");
+const jwtGenerator = require("../../utils/jwtGenerator");
 router.post("/signup/customer", validInfo,async (req, res) => {
     try {
         const { fname, email,lname, password, number } = req.body;

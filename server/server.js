@@ -17,10 +17,12 @@ app.use('/', express.static(path.join(__dirname, 'static')))
 //ROUTES//
 //register and login routes
 const port = process.env.PORT;
-app.use("", require("./routes/start"));
-app.use("",require("./routes/getProfile"));
-app.use("",require("./routes/updateProfile"));
-
+app.use("", require("./routes/Customers/start"));
+app.use("",require("./routes/Customers/getProfile"));
+app.use("",require("./routes/Customers/updateProfile"));
+app.use("",require("./routes/Repairs/handleCancel"));
+app.use("",require("./routes/Repairs/handleSubmit"));
+app.use("",require("./routes/Workers/workers"));
 app.listen(port,() =>{
     console.log('server is working on port ',port);
 }); 

@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const user = require("../models/User")
-const authorization = require("../middleware/authorization");
+const user = require("../../models/User")
+const authorization = require("../../middleware/authorization");
 
 router.get("/api/customer/getprofile", authorization, (req, res) => {
 	user.findById({ _id: req.user }, function(err, docs) {
