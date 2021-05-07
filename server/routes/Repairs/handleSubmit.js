@@ -16,6 +16,7 @@ router.post("/user/submit",authorization, async(req,res) => {
         const worker_1 = await worker.findOne({status:"Available"});
         if(user_1){
             if(worker_1){
+                worker_1.status = "Busy"
                 if(repair_type=="Car"){
             let newRepair = await repair.create({
                 user_id:user_1._id,
@@ -60,6 +61,8 @@ else{
 }
     catch(err){
         console.log(err);
+        res.status(400).json({error:err})
+
     }
 });
 module.exports = router;

@@ -23,6 +23,8 @@ app.use("",require("./routes/Customers/updateProfile"));
 app.use("",require("./routes/Repairs/handleCancel"));
 app.use("",require("./routes/Repairs/handleSubmit"));
 app.use("",require("./routes/Workers/workers"));
+app.use("",require("./routes/Workers/workers"));
+app.use("",require("./routes/Repairs/handleArrived"))
 app.listen(port,() =>{
     console.log('server is working on port ',port);
 }); 

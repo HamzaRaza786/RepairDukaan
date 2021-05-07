@@ -10,10 +10,11 @@ router.post("/user/cancel", authorization,async(req,res) => {
         } = req.body;
         const repair_1 = await repair.findOne({_id:repair_id});
         const worker_1 = await worker.findOne({ _id:repair_1.worker_id });
+        worker_1.status = "Available"
         if(repair_type=="Car"){
             if(time > 5)
             res.status(200).json({ status: "Booking Cancelled",details:{
-                user_id:user_1._id,
+                user_id:repair_1.user_id,
                 worker_id:worker_1._id,
                 location:repair_1.location,
                 status:"Cancelled",
@@ -21,7 +22,7 @@ router.post("/user/cancel", authorization,async(req,res) => {
             } });
             else
                 res.status(200).json({ status: "Booking Cancelled",details:{
-                    user_id:repair_1._id,
+                    user_id:repair_1.user_id,
                     worker_id:worker_1._id,
                     location:repair_1.location,
                     status:"Cancelled",
@@ -31,7 +32,7 @@ router.post("/user/cancel", authorization,async(req,res) => {
         else{
             if(time > 5)
             res.status(200).json({ status: "Booking Cancelled",details:{
-                user_id:user_1._id,
+                user_id:repair_1.user_id,
                 worker_id:worker_1._id,
                 location:repair_1.location,
                 status:"Cancelled",
@@ -39,7 +40,7 @@ router.post("/user/cancel", authorization,async(req,res) => {
             } });
             else
                 res.status(200).json({ status: "Booking Cancelled",details:{
-                    user_id:repair_1._id,
+                    user_id:repair_1.user_id,
                     worker_id:worker_1._id,
                     location:repair_1.location,
                     status:"Cancelled",
@@ -50,6 +51,7 @@ router.post("/user/cancel", authorization,async(req,res) => {
 }
     catch(err){
         console.log(err);
+        res.status(400).json({error:err})
     }
 });
 module.exports = router;
