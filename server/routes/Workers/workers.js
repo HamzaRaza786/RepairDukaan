@@ -1,29 +1,32 @@
 const router = require('express').Router();
 let Workers = require('../../models/Worker');
+const bcrypt = require('bcrypt-nodejs');
 const authorization = require("../../middleware/authorization");
 const validInfo = require('../../middleware/validInfo');
 router.route('/worker/register').post(async(req, res) => {
     const { first_name, last_name, email, password, phone_number } = req.body;
-    const user_1 = await user.findOne({ email })
+    const user_1 = await Workers.findOne({ email })
     if (user_1) {
         return res.status(401).json("User already exist");
     }
-
     else {
+        const saltRound = 10;
+        const salt = bcrypt.genSaltSync(saltRound);
+        const hash = bcrypt.hashSync(password, salt);
         const newWorkers = new Workers({
             first_name,
             last_name,
-            password,
+            "password":hash,
             email,
-            phone_number
+            phone_number,
+            status:"Available"
         });
-
         newWorkers.save()
             .then(() => res.json('Worker added!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
-router.route('/worker/login').post(validInfo,async (req, res) => {
+router.route('/worker/login').post(async (req, res) => {
     try {
         const { email, password } = req.body;
         const user_1 = await Workers.findOne({ email }).lean()

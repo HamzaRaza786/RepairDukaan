@@ -3,33 +3,34 @@ const user = require("../../models/User")
 const repair = require("../../models/Repair")
 const worker = require("../../models/Worker")
 const authorization = require("../../middleware/authorization");
-router.post("/user/submit",authorization, async(req,res) => {
+router.post("/user/submit", async(req,res) => {
     try {
+        //console.log(req.body)
     const { user_id,
-        location: {
-            latitude,
-            longitude
-        },
+        location,
         repair_type,
         } = req.body;
+        //console.log(location)
         const user_1 = await user.findOne({ _id:user_id });
-        const worker_1 = await worker.findOne({status:"Available"});
+        const worker_1 = await worker.findOneAndUpdate({status:"Available"},{status:"Busy"});
         if(user_1){
             if(worker_1){
-                worker_1.status = "Busy"
                 if(repair_type=="Car"){
             let newRepair = await repair.create({
                 user_id:user_1._id,
                 worker_id:worker_1._id,
-                location,
+                location: {"latitude":location.latitude,"longitude":location.longitude},
                 status:"In Progress",
-                amount:300
+                repair_type,
+                amount:300,
+                
             });
             res.status(200).json({ status: "Repair Booked",details:{
                 user_id:user_1._id,
                 worker_id:worker_1._id,
-                location,
+                location: {"latitude":location.latitude,"longitude":location.longitude},
                 status:"In Progress",
+                repair_type,
                 amount:300
             } });
         }
@@ -37,16 +38,18 @@ router.post("/user/submit",authorization, async(req,res) => {
             let newRepair = await repair.create({
                 user_id:user_1._id,
                 worker_id:worker_1._id,
-                location,
+                location: {"latitude":location.latitude,"longitude":location.longitude},
                 status:"In Progress",
+                repair_type,
                 amount:300
             });
             res.status(200).json({ status: "Repair Booked",details:{
                 id:newRepair._id,
                 user_id:user_1._id,
                 worker_id:worker_1._id,
-                location,
+                location: {"latitude":location.latitude,"longitude":location.longitude},
                 status:"In Progress",
+                repair_type,
                 amount:150
             } });
         }

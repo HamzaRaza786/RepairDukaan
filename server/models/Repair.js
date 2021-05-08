@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const RepairsSchema = new Schema({
     user_id: { type: String, required: true },
     worker_id: { type: String, required: true },
-    location: { type: Object, required: true },
+    location: { latitude:{type:Number},longitude:{type:Number} },
     status: { type:String , required: true },
     amount:{type:Number,required:true},
     repair_type:{type:String,required:true}

@@ -6,7 +6,7 @@ const workersSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true },
     phone_number: { type: String, required: true },
-    status:{type:String,required: true},
+    status:{type:String,required: false},
 });
 const Workers = mongoose.model('Workers', workersSchema);
 

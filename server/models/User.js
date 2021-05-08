@@ -7,7 +7,8 @@ const usersSchema = new Schema({
   join_date: { type: Date, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  phone_number: { type: Array, required: false }
+  phone_number: { type: String, required: false },
+  balance:{type:Number,required:false}
 });
 const users = mongoose.model('usersSchema', usersSchema);
-module.exports = users
+module.exports = users;
